@@ -75,18 +75,22 @@ class Order:  # the Context
         fmt = '<Order total: {:.2f} due: {:.2f}>'
         return fmt.format(self.total(), self.due())
 
+
 # BEGIN STRATEGY_BEST4
 
-promos = []  # <1>
+promos = []  # <1>promos 列表起初是空的。
 
-def promotion(promo_func):  # <2>
+
+def promotion(promo_func):  # <2>promotion 把 promo_func 添加到 promos 列表中，然后原封不动地将其返回。
     promos.append(promo_func)
     return promo_func
 
-@promotion  # <3>
+
+@promotion  # <3>被 @promotion 装饰的函数都会添加到 promos 列表中。
 def fidelity(order):
     """5% discount for customers with 1000 or more fidelity points"""
     return order.total() * .05 if order.customer.fidelity >= 1000 else 0
+
 
 @promotion
 def bulk_item(order):
@@ -97,6 +101,7 @@ def bulk_item(order):
             discount += item.total() * .1
     return discount
 
+
 @promotion
 def large_order(order):
     """7% discount for orders with 10 or more distinct items"""
@@ -105,7 +110,8 @@ def large_order(order):
         return order.total() * .07
     return 0
 
-def best_promo(order):  # <4>
+
+def best_promo(order):  # <4>best_promos 无需修改，因为它依赖 promos 列表。
     """Select best discount available
     """
     return max(promo(order) for promo in promos)
