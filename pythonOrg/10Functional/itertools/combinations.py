@@ -14,7 +14,7 @@ def combinations(iterable, r):
         for i in reversed(range(r)):
             if indices[i] != i + n - r:
                 break
-        else:
+        else:  # 这个语句，如果for没有break则一定会执行
             return
         indices[i] += 1
         for j in range(i + 1, r):
@@ -23,5 +23,11 @@ def combinations(iterable, r):
 
 
 if __name__ == "__main__":
-    print(list(combinations('ABCD', 2)))
-    print(list(combinations(range(4), 3)))
+    print(list(combinations('ABC', 2)))
+    # print(list(combinations(range(4), 3)))
+    # nums = [1, 2]
+    # for i in nums:
+    #     print(i)
+    #     break
+    # else:
+    #     print("empty array")

@@ -10,9 +10,9 @@ def accumulate(iterable, func=operator.add):
     # accumulate([1,2,3,4,5]) --> 1 3 6 10 15
     # accumulate([1,2,3,4,5], operator.mul) --> 1 2 6 24 120
     # 这里如果就用一个for循环来表示的话，因为需要返回第一个元素，所以很不优雅。
-    it = iter(iterable)
+    it = iter(iterable)  # 返回一个迭代器
     try:
-        total = next(it)
+        total = next(it)  # 这里可能是一个空的
     except StopIteration:
         return
     yield total
