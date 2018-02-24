@@ -12,9 +12,9 @@ def dropwhile(predicate, iterable):
     iterable = iter(iterable)  # 很容易的使用yield语法
     for x in iterable:
         if not predicate(x):
-            yield x  # 这里已经调用了一次next了，所以如果该值不满足条件后，应该要将其返回
+            yield x  # 这里已经调用了一次next了，所以如果该值不满足条件后，应该要将其返回.这里同时保存了迭代的位子
             break
-    for x in iterable:
+    for x in iterable:  # next(..)
         yield x
 
 

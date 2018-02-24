@@ -14,16 +14,34 @@ Daniel Patterson, Junsong Li, Anand Chitipothu, and Shriram Krishnamurthi.
 DOI=10.1145/2544173.2509536 http://doi.acm.org/10.1145/2544173.2509536
 """
 
+
 # BEGIN YIELD_DELEGATE_FAIL
 def f():
     def do_yield(n):
         yield n
+
     x = 0
     while True:
         x += 1
         do_yield(x)
+
+
+def f1():
+    def do_yield(n):
+        yield n
+
+    x = 0
+
+    while True:
+        x += 1
+        try:
+            print(next(do_yield(x)))
+        except StopIteration:
+            continue
+
+
 # END YIELD_DELEGATE_FAIL
 
 if __name__ == '__main__':
     print('Invoking f() results in an infinite loop')
-    f()
+    f1()
